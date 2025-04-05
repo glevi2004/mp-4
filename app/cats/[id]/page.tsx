@@ -148,7 +148,7 @@ export default function CatPage() {
                     variant="body1"
                     sx={{ color: "text.secondary", fontStyle: "italic" }}
                   >
-                    "{breed.temperament}"
+                    {breed.temperament}
                   </Typography>
                 </Box>
 
@@ -189,7 +189,7 @@ export default function CatPage() {
                   Mystery Cat
                 </Typography>
                 <Typography>
-                  This cat has no breed information available, but it's still
+                  This cat has no breed information available, but its still
                   adorable!
                 </Typography>
               </Box>
