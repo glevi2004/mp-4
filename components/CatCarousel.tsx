@@ -9,8 +9,8 @@ import Loading from "@/app/loading";
 export default function CatCarousel() {
   const [cats, setCats] = useState<Cat[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(false);
   const [prefetching, setPrefetching] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Fetch initial cat on component mount
   useEffect(() => {
@@ -27,18 +27,17 @@ export default function CatCarousel() {
   }, [cats, currentIndex, prefetching]);
 
   const fetchNextCat = async () => {
-    setLoading(true);
     try {
       const newCat = await fetchRandomCat();
       if (newCat) {
         setCats((prevCats) => [...prevCats, newCat]);
+        setError(null);
       } else {
         throw new Error("No cat returned from API");
       }
     } catch (err) {
       console.error("Error fetching cat:", err);
     } finally {
-      setLoading(false);
     }
   };
 
@@ -48,6 +47,7 @@ export default function CatCarousel() {
       const newCat = await fetchRandomCat();
       if (newCat) {
         setCats((prevCats) => [...prevCats, newCat]);
+        setError(null);
       }
     } catch (err) {
       console.error("Error prefetching next cat:", err);
@@ -73,7 +73,7 @@ export default function CatCarousel() {
     }
   };
 
-  if (loading) {
+  if (cats.length === 0) {
     return <Loading />;
   }
 
