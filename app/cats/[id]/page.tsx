@@ -11,7 +11,6 @@ import {
   Divider,
   Chip,
   Button,
-  CircularProgress,
 } from "@mui/material";
 import { Cat, fetchCatById } from "../../../api/services/catApi";
 import {
